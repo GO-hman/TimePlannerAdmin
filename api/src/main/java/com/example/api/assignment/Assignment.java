@@ -18,15 +18,25 @@ import lombok.Data;
 @Table(name = "assignments")
 @Data
 public class Assignment {
-    
+
     @Id
-    @GeneratedValue UUID id;
-    
+    @GeneratedValue
+    UUID id;
+
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "employee_id", nullable=false)
+    @JoinColumn(name = "employee_id", nullable = false)
     @JsonBackReference
     private Employee employee;
+
+    public Assignment() {
+    }
+
+    public Assignment(AssignmentViewInput assignmentViewInput) {
+        this.startTime = assignmentViewInput.getStartTime();
+        this.endTime = assignmentViewInput.getEndTime();
+        this.employee = assignmentViewInput.getEmployee();
+    }
 }
