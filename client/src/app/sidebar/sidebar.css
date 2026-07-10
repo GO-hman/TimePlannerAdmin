@@ -1,0 +1,28 @@
+.active {
+  font-weight: bold;
+  color: dodgerblue;
+  box-shadow: 20px 5px 5px red;
+}
+
+.links a {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+  color: white;
+  font-size: larger;
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: gray;
+}
+
+#sidebar {
+  padding: 1rem;
+  width: 250px;
+  background: #1f2937;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 1px 0 2px 1px rgba(0, 0, 0, 0.35);
+  z-index: 99999;
+}
