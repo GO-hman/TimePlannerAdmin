@@ -58,7 +58,7 @@ public class AssignmentController {
 
     @PatchMapping("/assignments/{id}")
     public ResponseEntity<AssignmentViewOutput> patchAssignment(
-            @Valid @RequestBody AssignmentViewPatchInput assignmentPatch) {
+            @Valid @RequestBody AssignmentViewPatchInput assignmentPatch, @PathVariable("id") UUID id) {
         AssignmentViewOutput assignmentViewOutput = assignmentService.patchAssignment(assignmentPatch);
         return ResponseEntity.ok(assignmentViewOutput);
     }
