@@ -1,0 +1,12 @@
+<p>User pages!</p>
+
+<ul>
+  @if (loading()) {
+    <p>Loading...</p>
+  } @else {
+    <li>Employees:</li>
+    @for (employee of employees(); track employee.id) {
+      <li>{{ employee.email }} {{ employee.name }}</li>
+    }
+  }
+</ul>

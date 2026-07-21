@@ -1,0 +1,30 @@
+<p>user-create works!</p>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>
+    Namn:
+    <input type="text" formControlName="name" />
+  </label>
+
+  <label>
+    Epost:
+    <input type="text" formControlName="email" />
+  </label>
+
+  <button type="submit">Skapa användare</button>
+</form>
+@if (email?.touched && email?.invalid) {
+  <div class="alert alert-danger">
+    @if (email?.errors?.['required']) {
+      <span>E-post är obligatorisk.</span>
+    }
+
+    @if (email?.errors?.['email']) {
+      <span>Ange en giltig e-postadress.</span>
+    }
+  </div>
+}
+
+@if (errorMessage) {
+  <div class="alert alert-danger">Kunde inte skapa användaren.</div>
+}

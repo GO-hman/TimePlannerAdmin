@@ -3,7 +3,9 @@ package com.example.api.employee;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -17,6 +19,13 @@ public class EmployeeService {
     }
 
     public EmployeeViewOutput createEmployee(EmployeeViewInput employeeIn) {
+
+        if (empRepo.existsByEmail(employeeIn.getEmail())) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "An employee with this email already exists.");
+        }
+
         Employee employee = new Employee();
         employee.setName(employeeIn.getName());
         employee.setEmail(employeeIn.getEmail());
