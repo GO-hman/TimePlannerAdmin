@@ -2,7 +2,7 @@ package com.example.api.assignment;
 
 import java.time.LocalDateTime;
 
-import com.example.api.employee.Employee;
+import com.example.api.user.User;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -17,6 +17,6 @@ public class AssignmentViewInput {
     private LocalDateTime endTime;
 
     @NotNull(message = "Tilldela resurs")
-    private Employee employee;
+    private User user;
 
 }

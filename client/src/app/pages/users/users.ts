@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmployeeControllerService, EmployeeViewOutput } from '../../../api';
+import { UserViewOutput, UserControllerService } from '../../../api';
 import { firstValueFrom } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -15,16 +15,16 @@ interface ApiError {
   styleUrl: './users.css',
 })
 export class Users {
-  private employeeService = inject(EmployeeControllerService);
+  private userService = inject(UserControllerService);
 
-  employees = signal<EmployeeViewOutput[]>([]);
+  users = signal<UserViewOutput[]>([]);
   loading = signal<boolean>(false);
   errors = signal<ApiError | undefined>(undefined);
 
   async ngOnInit() {
     this.loading.set(true);
     try {
-      this.employees.set(await firstValueFrom(this.employeeService.getAll()));
+      this.users.set(await firstValueFrom(this.userService.getAll()));
     } catch (e) {
       const error = e as HttpErrorResponse;
       this.errors.set({ message: error.message, status: error.status.toString() });

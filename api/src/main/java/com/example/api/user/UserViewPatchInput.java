@@ -1,4 +1,4 @@
-package com.example.api.employee;
+package com.example.api.user;
 
 import com.example.api.utils.ValidationLengths;
 
@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class EmployeeViewInput {
+public class UserViewPatchInput {
 
     @Size(max = ValidationLengths.MAX_NAME_LENGTH)
     @NotNull(message = "Ange namn")
