@@ -1,4 +1,4 @@
-package com.example.api.employee;
+package com.example.api.user;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +15,17 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "employees")
+@Table(name = "users")
 @Data
-public class Employee {
+public class User {
 
     @Id
-    @GeneratedValue UUID id;
+    @GeneratedValue
+    UUID id;
     private String name;
     private String email;
-      
-    @OneToMany(mappedBy = "employee")
+
+    @OneToMany(mappedBy = "user")
     @JsonManagedReference
     private List<Assignment> assignments = new ArrayList<>();
 }

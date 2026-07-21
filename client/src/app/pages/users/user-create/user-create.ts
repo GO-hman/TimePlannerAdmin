@@ -1,11 +1,10 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { EmployeeControllerService } from '../../../../api/services/employeeController.service';
 import { firstValueFrom } from 'rxjs';
-import { EmployeeViewInput } from '../../../../api';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { UserControllerService, UserViewInput } from '../../../../api';
 
 @Component({
   selector: 'app-user-create',
@@ -14,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './user-create.css',
 })
 export class UserCreate {
-  private employeeService = inject(EmployeeControllerService);
+  private userService = inject(UserControllerService);
   private cdr = inject(ChangeDetectorRef);
   private router = inject(Router);
 
@@ -41,10 +40,10 @@ export class UserCreate {
       return;
     }
 
-    var employee = this.form.getRawValue() as EmployeeViewInput;
+    var user = this.form.getRawValue() as UserViewInput;
 
     try {
-      var response = await firstValueFrom(this.employeeService.createEmployee(employee));
+      var response = await firstValueFrom(this.userService.createUser(user));
       await console.log(response);
       this.router.navigate(['/users']);
     } catch (error) {

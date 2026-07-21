@@ -4,9 +4,9 @@
   @if (loading()) {
     <p>Loading...</p>
   } @else {
-    <li>Employees:</li>
-    @for (employee of employees(); track employee.id) {
-      <li>{{ employee.email }} {{ employee.name }}</li>
+    <li>Användare:</li>
+    @for (user of users(); track user.id) {
+      <li>{{ user.email }} {{ user.name }}</li>
     }
   }
 </ul>

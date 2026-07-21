@@ -3,7 +3,7 @@ package com.example.api.assignment;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.example.api.employee.Employee;
+import com.example.api.user.User;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -20,13 +20,13 @@ public class AssignmentViewOutput {
     private LocalDateTime endTime;
 
     @NotNull
-    private Employee employee;
+    private User user;
 
     public AssignmentViewOutput(Assignment assignment) {
         this.id = assignment.getId();
         this.startTime = assignment.getStartTime();
         this.endTime = assignment.getEndTime();
-        this.employee = assignment.getEmployee();
+        this.user = assignment.getUser();
     }
 
 }

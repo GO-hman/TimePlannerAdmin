@@ -3,7 +3,7 @@ package com.example.api.assignment;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.example.api.employee.Employee;
+import com.example.api.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
@@ -27,9 +27,9 @@ public class Assignment {
     private LocalDateTime endTime;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
-    private Employee employee;
+    private User user;
 
     public Assignment() {
     }
@@ -37,6 +37,6 @@ public class Assignment {
     public Assignment(AssignmentViewInput assignmentViewInput) {
         this.startTime = assignmentViewInput.getStartTime();
         this.endTime = assignmentViewInput.getEndTime();
-        this.employee = assignmentViewInput.getEmployee();
+        this.user = assignmentViewInput.getUser();
     }
 }
