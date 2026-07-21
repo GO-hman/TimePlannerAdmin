@@ -14,7 +14,7 @@
   <button type="submit">Skapa användare</button>
 </form>
 @if (email?.touched && email?.invalid) {
-  <div class="error">
+  <div class="alert alert-danger">
     @if (email?.errors?.['required']) {
       <span>E-post är obligatorisk.</span>
     }
@@ -23,4 +23,8 @@
       <span>Ange en giltig e-postadress.</span>
     }
   </div>
+}
+
+@if (errorMessage) {
+  <div class="alert alert-danger">Kunde inte skapa användaren.</div>
 }

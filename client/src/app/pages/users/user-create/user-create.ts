@@ -1,17 +1,24 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EmployeeControllerService } from '../../../../api/services/employeeController.service';
 import { firstValueFrom } from 'rxjs';
 import { EmployeeViewInput } from '../../../../api';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-create',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './user-create.html',
   styleUrl: './user-create.css',
 })
 export class UserCreate {
   private employeeService = inject(EmployeeControllerService);
+  private cdr = inject(ChangeDetectorRef);
+  private router = inject(Router);
+
+  errorMessage = '';
 
   private fb = inject(FormBuilder);
 
@@ -36,8 +43,14 @@ export class UserCreate {
 
     var employee = this.form.getRawValue() as EmployeeViewInput;
 
-    var response = await firstValueFrom(this.employeeService.createEmployee(employee));
-
-    await console.log(response);
+    try {
+      var response = await firstValueFrom(this.employeeService.createEmployee(employee));
+      await console.log(response);
+      this.router.navigate(['/users']);
+    } catch (error) {
+      const httpError = error as HttpErrorResponse;
+      this.errorMessage = httpError.error?.message ?? httpError.message;
+      this.cdr.detectChanges();
+    }
   }
 }

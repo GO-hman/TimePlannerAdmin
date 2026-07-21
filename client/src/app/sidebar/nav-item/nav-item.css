@@ -1,3 +1,18 @@
-p {
+a {
+  display: block;
+  padding: 10px 15px;
+  margin: 16px 0;
   color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+a:hover {
+  background-color: #333;
+}
+
+a.active {
+  background-color: #555;
 }
