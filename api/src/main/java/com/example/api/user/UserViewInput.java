@@ -1,5 +1,6 @@
 package com.example.api.user;
 
+import com.example.api.role.Role;
 import com.example.api.utils.ValidationLengths;
 
 import jakarta.validation.constraints.Email;
@@ -18,5 +19,10 @@ public class UserViewInput {
     @NotNull(message = "Ange e-postadress")
     @Email(message = "Ogiltig e-postadress")
     private String email;
+
+    private String password;
+
+    @NotNull(message = "Välj en roll")
+    private Role role;
 
 }
