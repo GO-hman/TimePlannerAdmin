@@ -2,9 +2,11 @@
   <h3>TimePlannerAdmin</h3>
 
   <nav class="links">
-    <app-nav-item label="Hem" link="/" />
+    <app-nav-item label="Hem" link="/dashboard" />
 
-    <app-nav-item label="Användare" link="/users" />
-    <app-nav-item label="Skapa användare" link="/users/user-create" />
+    <app-nav-item label="Användare" link="/dashboard/users" />
+    <app-nav-item label="Skapa användare" link="/dashboard/users/user-create" />
   </nav>
+
+  <button type="button" (click)="logout()">Logga ut</button>
 </div>

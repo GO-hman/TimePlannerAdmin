@@ -23,7 +23,10 @@ export class Login {
 
   onSubmit() {
     this.auth.login(this.loginForm.value as UserLoginViewInput).subscribe({
-      next: () => this.router.navigate(['/dashboard']),
+      next: (response) => {
+        this.auth.setToken(response.token!);
+        this.router.navigate(['/dashboard']);
+      },
       error: (err) => alert('Login failed'),
     });
   }

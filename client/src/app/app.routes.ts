@@ -3,19 +3,31 @@ import { Users } from './pages/users/users';
 import { UserCreate } from './pages/users/user-create/user-create';
 import { AuthGuard } from './auth/auth.guard';
 import { Dashboard } from './pages/dashboard/dashboard';
+import { Login } from './components/login/login';
 
 export const routes: Routes = [
   {
-    path: 'users',
-    component: Users,
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
   },
   {
-    path: 'users/user-create',
-    component: UserCreate,
+    path: 'login',
+    component: Login,
   },
   {
     path: 'dashboard',
     component: Dashboard,
     canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'users',
+        component: Users,
+      },
+      {
+        path: 'users/user-create',
+        component: UserCreate,
+      },
+    ],
   },
 ];
