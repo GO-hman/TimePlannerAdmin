@@ -31,6 +31,7 @@ public class SecurityConfiguration {
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http
                                 .csrf(csrf -> csrf.disable())
+                                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                                 .authorizeHttpRequests(auth -> auth
                                                 .requestMatchers(
                                                                 "/auth/**",
@@ -56,7 +57,7 @@ public class SecurityConfiguration {
                 CorsConfiguration configuration = new CorsConfiguration();
 
                 configuration.setAllowedOrigins(List.of("http://localhost:4200"));
-                configuration.setAllowedMethods(List.of("GET", "POST"));
+                configuration.setAllowedMethods(List.of("GET", "POST", "PATCH", "DELETE"));
                 configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 
                 UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

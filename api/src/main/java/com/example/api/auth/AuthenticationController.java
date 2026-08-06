@@ -11,6 +11,7 @@ import com.example.api.services.JwtService;
 import com.example.api.user.User;
 import com.example.api.user.UserLoginViewInput;
 import com.example.api.user.UserRegistrationViewInput;
+import com.example.api.user.UserViewOutput;
 
 @RequestMapping("/auth")
 @RestController
@@ -25,9 +26,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody UserRegistrationViewInput input) {
+    public ResponseEntity<UserViewOutput> register(@RequestBody UserRegistrationViewInput input) {
         User newUser = authenticationService.registerUser(input);
-        return ResponseEntity.ok(newUser);
+        UserViewOutput userViewOutput = new UserViewOutput(newUser);
+        return ResponseEntity.ok(userViewOutput);
     }
 
     @PostMapping("/login")
