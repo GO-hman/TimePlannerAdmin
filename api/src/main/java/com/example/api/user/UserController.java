@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
+@RequestMapping("/user")
 @RestController
 public class UserController {
 
@@ -25,7 +27,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/")
     public ResponseEntity<List<UserViewOutput>> getAll() {
         var users = userService.getAll();
         if (users == null) {
@@ -34,7 +36,7 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserViewOutput> getUser(@PathVariable("id") UUID id) {
         UserViewOutput userViewOut = userService.getUserById(id);
 
@@ -44,7 +46,7 @@ public class UserController {
         return ResponseEntity.ok(userViewOut);
     }
 
-    @PostMapping("/user")
+    @PostMapping("/")
     public ResponseEntity<UserViewOutput> createUser(
             @Valid @RequestBody UserViewInput userIn) {
         UserViewOutput userViewOut = userService.createUser(userIn);
@@ -52,7 +54,7 @@ public class UserController {
         return ResponseEntity.ok(userViewOut);
     }
 
-    @PatchMapping("/user/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<UserViewOutput> patchUser(@Valid @RequestBody UserViewPatchInput userIn,
             @PathVariable("id") UUID id) {
         var userViewOut = userService.patchUser(userIn, id);
@@ -61,7 +63,7 @@ public class UserController {
 
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") UUID id) {
         try {
             userService.deleteUser(id);
@@ -71,7 +73,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user/me")
+    @GetMapping("/me")
     public ResponseEntity<UserViewOutput> authenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 

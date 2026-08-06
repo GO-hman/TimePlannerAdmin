@@ -19,6 +19,12 @@ export interface UserViewOutput {
     email: string;
 }
 
+export interface UserRegistrationViewInput {
+    name?: string;
+    email?: string;
+    password?: string;
+}
+
 export interface Assignment {
     id?: string;
     startTime?: Date;
@@ -26,17 +32,40 @@ export interface Assignment {
     user?: User;
 }
 
-export interface AssignmentViewInput {
-    startTime: Date;
-    endTime: Date;
-    user: User;
+export interface GrantedAuthority {
+    authority?: string;
 }
 
 export interface User {
     id?: string;
     name?: string;
     email?: string;
+    password?: string;
+    createdAt?: Date;
+    updatedAt?: Date;
     assignments?: Array<Assignment>;
+    enabled?: boolean;
+    authorities?: Array<GrantedAuthority>;
+    username?: string;
+    accountNonExpired?: boolean;
+    accountNonLocked?: boolean;
+    credentialsNonExpired?: boolean;
+}
+
+export interface UserLoginViewInput {
+    email?: string;
+    password?: string;
+}
+
+export interface LoginResponse {
+    token?: string;
+    expiresIn?: number;
+}
+
+export interface AssignmentViewInput {
+    startTime: Date;
+    endTime: Date;
+    user: User;
 }
 
 export interface AssignmentViewOutput {
