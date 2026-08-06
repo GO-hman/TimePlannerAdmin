@@ -29,7 +29,7 @@ export class UserControllerService {
     getAll(observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<Array<UserViewOutput>>>;
     getAll(observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Array<UserViewOutput>>>;
     getAll(observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/user`;
+        const url = `${this.basePath}/user/`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -51,7 +51,7 @@ export class UserControllerService {
     createUser(userViewInput: UserViewInput, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<UserViewOutput>>;
     createUser(userViewInput: UserViewInput, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<UserViewOutput>>;
     createUser(userViewInput: UserViewInput, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/user`;
+        const url = `${this.basePath}/user/`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -140,6 +140,28 @@ export class UserControllerService {
             observe,
             headers,
             responseType: 'text',
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        });
+    }
+
+    authenticatedUser(observe?: 'body', options?: RequestOptions<'json'>): Observable<UserViewOutput>;
+    authenticatedUser(observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<UserViewOutput>>;
+    authenticatedUser(observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<UserViewOutput>>;
+    authenticatedUser(observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/user/me`;
+
+        let headers: HttpHeaders;
+        if (options?.headers instanceof HttpHeaders) {
+            headers = options.headers;
+        } else {
+            headers = new HttpHeaders(options?.headers);
+        }
+
+        return this.httpClient.request('get', url, {
+            observe,
+            headers,
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

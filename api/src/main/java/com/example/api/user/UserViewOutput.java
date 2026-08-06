@@ -15,9 +15,9 @@ public class UserViewOutput {
     @NotNull
     private String email;
 
-    public UserViewOutput(User employee) {
-        this.id = employee.getId();
-        this.name = employee.getName();
-        this.email = employee.getEmail();
+    public UserViewOutput(User user) {
+        this.id = user.getId();
+        this.name = user.getName();
+        this.email = user.getEmail();
     }
 }
