@@ -9,6 +9,11 @@
     <input type="text" formControlName="email" />
   </label>
 
+  <label>
+    Lösenord:
+    <input type="password" formControlName="password" />
+  </label>
+
   <button type="submit">Skapa användare</button>
 </form>
 @if (email?.touched && email?.invalid) {

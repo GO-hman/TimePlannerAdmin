@@ -3,8 +3,6 @@ package com.example.api.assignment;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.dao.DataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,25 +25,14 @@ public class AssignmentController {
 
     @GetMapping("/assignments")
     public ResponseEntity<List<AssignmentViewOutput>> getAll() {
-        try {
-
-            List<AssignmentViewOutput> assignmentViewOutputs = assignmentService.getAll();
-            return ResponseEntity.ok(assignmentViewOutputs);
-
-        } catch (DataAccessException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-
+        List<AssignmentViewOutput> assignmentViewOutputs = assignmentService.getAll();
+        return ResponseEntity.ok(assignmentViewOutputs);
     }
 
     @DeleteMapping("/assignments/{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") UUID id) {
-        try {
-            assignmentService.deleteAssignment(id);
-            return ResponseEntity.ok().body("Raderad");
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().build();
-        }
+        assignmentService.deleteAssignment(id);
+        return ResponseEntity.ok().body("Raderad");
     }
 
     @PostMapping("/assignments")

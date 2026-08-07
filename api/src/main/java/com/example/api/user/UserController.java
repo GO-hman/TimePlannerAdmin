@@ -30,18 +30,12 @@ public class UserController {
     @GetMapping("/")
     public ResponseEntity<List<UserViewOutput>> getAll() {
         var users = userService.getAll();
-        if (users == null) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserViewOutput> getUser(@PathVariable("id") UUID id) {
         UserViewOutput userViewOut = userService.getUserById(id);
-
-        if (userViewOut == null)
-            return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(userViewOut);
     }
@@ -64,13 +58,9 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable("id") UUID id) {
-        try {
-            userService.deleteUser(id);
-            return ResponseEntity.ok().build();
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") UUID id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/me")

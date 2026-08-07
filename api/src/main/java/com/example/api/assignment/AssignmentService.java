@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.EntityNotFoundException;
+import com.example.api.exceptions.ResourceNotFoundException;
 
 @Service
 public class AssignmentService {
@@ -23,7 +23,8 @@ public class AssignmentService {
     }
 
     public AssignmentViewOutput getById(UUID id) {
-        Assignment assignment = assignmentRepo.findById(id).orElse(null);
+        Assignment assignment = assignmentRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No assignment found with id " + id));
 
         return new AssignmentViewOutput(assignment);
     }
@@ -31,7 +32,7 @@ public class AssignmentService {
     public void deleteAssignment(UUID id) {
 
         Assignment assignment = assignmentRepo.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Misslyckades att radera entiteten"));
+                .orElseThrow(() -> new ResourceNotFoundException("No assignment found with id " + id));
 
         assignmentRepo.delete(assignment);
     }
@@ -45,10 +46,9 @@ public class AssignmentService {
     }
 
     public AssignmentViewOutput patchAssignment(AssignmentViewPatchInput assignmentInput) {
-        Assignment assignment = assignmentRepo.findById(assignmentInput.getId()).orElse(null);
-        if (assignment == null) {
-            throw new EntityNotFoundException();
-        }
+        Assignment assignment = assignmentRepo.findById(assignmentInput.getId())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "No assignment found with id " + assignmentInput.getId()));
 
         assignment.setStartTime(assignmentInput.getStartTime());
         assignment.setEndTime(assignmentInput.getEndTime());
