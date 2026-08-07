@@ -10,9 +10,15 @@ import {
   UserViewOutput,
 } from '../../api';
 
+interface SessionToken {
+  token: string;
+  expiresAt: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private baseUrl = 'http://localhost:8080';
+  private sessionKey = 'session';
 
   constructor(
     private http: HttpClient,
@@ -28,15 +34,34 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem(this.sessionKey);
     this.router.navigate(['/login']);
   }
 
-  setToken(token: string): void {
-    localStorage.setItem('token', token);
+  setSession(token: string, expiresIn: number): void {
+    const session: SessionToken = { token, expiresAt: Date.now() + expiresIn };
+    localStorage.setItem(this.sessionKey, JSON.stringify(session));
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return this.getSession()?.token ?? null;
+  }
+
+  isTokenExpired(): boolean {
+    const session = this.getSession();
+    return !session || Date.now() >= session.expiresAt;
+  }
+
+  private getSession(): SessionToken | null {
+    const raw = localStorage.getItem(this.sessionKey);
+    if (!raw) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(raw) as SessionToken;
+    } catch {
+      return null;
+    }
   }
 }
