@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { CanActivate, CanActivateChild } from '@angular/router';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard {
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) {}
+export class AuthGuard implements CanActivate, CanActivateChild {
+  constructor(private authService: AuthService) {}
 
   canActivate(): boolean {
-    const token = this.authService.getToken();
-    if (token) {
-      return true;
-    } else {
-      this.router.navigate(['/login']);
+    if (this.authService.isTokenExpired()) {
+      this.authService.logout();
       return false;
     }
+    return true;
+  }
+
+  canActivateChild(): boolean {
+    return this.canActivate();
   }
 }
