@@ -3,11 +3,10 @@ package com.example.api.user;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import jakarta.persistence.EntityNotFoundException;
+import com.example.api.exceptions.ResourceConflictException;
+import com.example.api.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -21,9 +20,7 @@ public class UserService {
     public UserViewOutput createUser(UserViewInput userIn) {
 
         if (userRepo.existsByEmail(userIn.getEmail())) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT,
-                    "A User with this email already exists.");
+            throw new ResourceConflictException("A User with this email already exists.");
         }
 
         User user = new User();
@@ -35,11 +32,8 @@ public class UserService {
     }
 
     public UserViewOutput getUserById(UUID id) {
-        User user = userRepo.findById(id).orElse(null);
-
-        if (user == null) {
-            throw new EntityNotFoundException();
-        }
+        User user = userRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No user found with id " + id));
 
         return new UserViewOutput(user);
     }
@@ -51,10 +45,8 @@ public class UserService {
     }
 
     public UserViewOutput patchUser(UserViewPatchInput userIn, UUID id) {
-        User user = userRepo.findById(id).orElse(null);
-        if (user == null) {
-            throw new EntityNotFoundException();
-        }
+        User user = userRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No user found with id " + id));
         user.setName(userIn.getName());
         user.setEmail(userIn.getEmail());
         userRepo.save(user);
@@ -62,6 +54,8 @@ public class UserService {
     }
 
     public void deleteUser(UUID id) {
-        userRepo.deleteById(id);
+        User user = userRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No user found with id " + id));
+        userRepo.delete(user);
     }
 }

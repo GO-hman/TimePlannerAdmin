@@ -5,6 +5,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.api.exceptions.ResourceConflictException;
 import com.example.api.user.User;
 import com.example.api.user.UserLoginViewInput;
 import com.example.api.user.UserRegistrationViewInput;
@@ -28,6 +29,10 @@ public class AuthenticationService {
     }
 
     public User registerUser(UserRegistrationViewInput input) {
+        if (userRepository.existsByEmail(input.getEmail())) {
+            throw new ResourceConflictException("A User with this email already exists.");
+        }
+
         User user = new User();
         user.setName(input.getName());
         user.setEmail(input.getEmail());

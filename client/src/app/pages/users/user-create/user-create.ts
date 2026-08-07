@@ -4,7 +4,12 @@ import { firstValueFrom } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { UserControllerService, UserViewInput } from '../../../../api';
+import {
+  AuthenticationControllerService,
+  UserControllerService,
+  UserRegistrationViewInput,
+  UserViewInput,
+} from '../../../../api';
 
 @Component({
   selector: 'app-user-create',
@@ -14,6 +19,7 @@ import { UserControllerService, UserViewInput } from '../../../../api';
 })
 export class UserCreate {
   private userService = inject(UserControllerService);
+  private authService = inject(AuthenticationControllerService);
   private cdr = inject(ChangeDetectorRef);
   private router = inject(Router);
 
@@ -29,9 +35,14 @@ export class UserCreate {
     return this.form.get('email');
   }
 
+  get password() {
+    return this.form.get('password');
+  }
+
   form = this.fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
   });
 
   async onSubmit() {
@@ -40,12 +51,12 @@ export class UserCreate {
       return;
     }
 
-    var user = this.form.getRawValue() as UserViewInput;
+    var user = this.form.getRawValue() as UserRegistrationViewInput;
 
     try {
-      var response = await firstValueFrom(this.userService.createUser(user));
-      await console.log(response);
-      this.router.navigate(['/users']);
+      var response = await firstValueFrom(this.authService.register(user));
+      console.log(response);
+      this.router.navigate(['/dashboard/users']);
     } catch (error) {
       const httpError = error as HttpErrorResponse;
       this.errorMessage = httpError.error?.message ?? httpError.message;
