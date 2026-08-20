@@ -8,5 +8,16 @@
     <app-nav-item label="Skapa användare" link="/dashboard/users/user-create" />
   </nav>
 
-  <button type="button" (click)="logout()">Logga ut</button>
+  <div class="sidebar-bottom">
+    <div class="theme-switch">
+      <mat-icon>light_mode</mat-icon>
+      <mat-slide-toggle
+        [checked]="theme.isDark()"
+        (change)="theme.toggle()"
+        aria-label="Mörkt läge"
+      />
+      <mat-icon>dark_mode</mat-icon>
+    </div>
+    <button type="button" (click)="logout()">Logga ut</button>
+  </div>
 </div>
