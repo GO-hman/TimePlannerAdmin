@@ -47,3 +47,19 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+.nav-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nav-divider mat-divider {
+  --mat-divider-color: rgba(255, 255, 255, 0.2);
+  flex: 1;
+}
