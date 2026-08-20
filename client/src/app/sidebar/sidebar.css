@@ -37,7 +37,8 @@
 .sidebar-bottom {
   margin-top: auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   gap: 0.5rem;
 }
 
