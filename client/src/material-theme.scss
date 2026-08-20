@@ -36,3 +36,16 @@ body {
   margin: 0;
   height: 100%;
 }
+
+// Reusable color variant for destructive/error actions (e.g. delete buttons).
+// mat.theme() doesn't expose a $theme object for the official
+// mat.button-color($theme, $color-variant: error) mixin, so this applies the
+// same system-level error tokens directly instead.
+.mat-error-variant {
+  --mat-fab-container-color: var(--mat-sys-error-container);
+  --mat-fab-foreground-color: var(--mat-sys-on-error-container);
+  --mat-text-button-state-layer-color: var(--mat-sys-error);
+  --mat-icon-button-state-layer-color: var(--mat-sys-error);
+  border-color: var(--mat-sys-error);
+  color: var(--mat-sys-error);
+}
