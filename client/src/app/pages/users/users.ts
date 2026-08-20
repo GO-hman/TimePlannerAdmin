@@ -8,7 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialog } from '../../confirm-dialog/confirm-dialog';
+import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
 
 interface ApiError {
   status: string;
