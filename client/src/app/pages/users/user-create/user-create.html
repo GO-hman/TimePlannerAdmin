@@ -1,21 +1,25 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label>
-    Namn:
-    <input type="text" formControlName="name" />
-  </label>
+<form class="form-column" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Namn</mat-label>
+    <input matInput type="text" formControlName="name" />
+  </mat-form-field>
 
-  <label>
-    Epost:
-    <input type="text" formControlName="email" />
-  </label>
+  <mat-form-field>
+    <mat-label>Epost</mat-label>
+    <input matInput type="email" formControlName="email" />
+  </mat-form-field>
 
-  <label>
-    Lösenord:
-    <input type="password" formControlName="password" />
-  </label>
+  <mat-form-field>
+    <mat-label>Lösenord</mat-label>
+    <input matInput type="password" formControlName="password" />
+  </mat-form-field>
 
-  <button type="submit">Skapa användare</button>
+  <button matButton type="submit" [disabled]="loading()">Skapa användare</button>
+  @if (loading()) {
+    <mat-progress-spinner mode="indeterminate" diameter="24" />
+  }
 </form>
+
 @if (email?.touched && email?.invalid) {
   <div class="alert alert-danger">
     @if (email?.errors?.['required']) {
@@ -28,6 +32,6 @@
   </div>
 }
 
-@if (errorMessage) {
+@if (errorMessage()) {
   <div class="alert alert-danger">Kunde inte skapa användaren.</div>
 }

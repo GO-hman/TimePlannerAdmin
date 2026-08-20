@@ -8,3 +8,9 @@ body {
 .alert.alert-danger {
   color: red;
 }
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

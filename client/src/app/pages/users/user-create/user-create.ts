@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -10,20 +10,32 @@ import {
   UserRegistrationViewInput,
   UserViewInput,
 } from '../../../../api';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatButton } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-user-create',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    MatFormField,
+    MatButton,
+    MatLabel,
+    MatInputModule,
+    MatProgressSpinner,
+  ],
   templateUrl: './user-create.html',
   styleUrl: './user-create.css',
 })
 export class UserCreate {
   private userService = inject(UserControllerService);
   private authService = inject(AuthenticationControllerService);
-  private cdr = inject(ChangeDetectorRef);
   private router = inject(Router);
 
-  errorMessage = '';
+  errorMessage = signal('');
+  loading = signal(false);
 
   private fb = inject(FormBuilder);
 
@@ -50,6 +62,7 @@ export class UserCreate {
       this.form.markAllAsTouched();
       return;
     }
+    this.loading.set(true);
 
     var user = this.form.getRawValue() as UserRegistrationViewInput;
 
@@ -59,8 +72,9 @@ export class UserCreate {
       this.router.navigate(['/dashboard/users']);
     } catch (error) {
       const httpError = error as HttpErrorResponse;
-      this.errorMessage = httpError.error?.message ?? httpError.message;
-      this.cdr.detectChanges();
+      this.errorMessage.set(httpError.error?.message ?? httpError.message);
+    } finally {
+      this.loading.set(false);
     }
   }
 }
