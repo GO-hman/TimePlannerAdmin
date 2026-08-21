@@ -8,7 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialog } from '../../confirm-dialog/confirm-dialog';
+import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
 
 interface ApiError {
   status: string;
@@ -27,7 +27,7 @@ export class Users {
   users = signal<UserViewOutput[]>([]);
   loading = signal<boolean>(false);
   errors = signal<ApiError | undefined>(undefined);
-  displayedColumns = ['email', 'name', 'util'];
+  displayedColumns = ['email', 'name', 'actions'];
 
   async ngOnInit() {
     this.loading.set(true);

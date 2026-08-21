@@ -4,6 +4,7 @@ import { UserCreate } from './pages/users/user-create/user-create';
 import { AuthGuard } from './auth/auth.guard';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Login } from './components/login/login';
+import { Assignments } from './pages/assignments/assignments';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,10 @@ export const routes: Routes = [
       {
         path: 'users/user-create',
         component: UserCreate,
+      },
+      {
+        path: 'assignments',
+        component: Assignments,
       },
     ],
   },
