@@ -50,4 +50,9 @@ public class AssignmentController {
         return ResponseEntity.ok(assignmentViewOutput);
     }
 
+    @GetMapping("/assigmnets/user/{id}")
+    public ResponseEntity<List<AssignmentViewOutput>> getByUserId(@PathVariable("id") UUID id) {
+        List<AssignmentViewOutput> assignmentViewOutputs = assignmentService.getByUserId(id);
+        return ResponseEntity.ok(assignmentViewOutputs);
+    }
 }
