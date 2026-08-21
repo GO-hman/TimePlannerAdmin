@@ -1,0 +1,26 @@
+.assignment-form {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+}
+
+.assignment-form mat-form-field {
+  flex: 1;
+}
+
+@media (max-width: 1200px) {
+  .assignment-form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.btn-row {
+  display: flex;
+  align-items: center;
+}
+
+.btn-row > button {
+  margin: 10px;
+}

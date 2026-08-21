@@ -27,7 +27,7 @@ export class Users {
   users = signal<UserViewOutput[]>([]);
   loading = signal<boolean>(false);
   errors = signal<ApiError | undefined>(undefined);
-  displayedColumns = ['email', 'name', 'util'];
+  displayedColumns = ['email', 'name', 'actions'];
 
   async ngOnInit() {
     this.loading.set(true);

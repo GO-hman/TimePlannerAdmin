@@ -29,7 +29,9 @@ export class Dashboard {
   drawer = viewChild.required<MatSidenav>('drawer');
 
   isMobile = toSignal(
-    this.breakpointObserver.observe(Breakpoints.Handset).pipe(map((result) => result.matches)),
+    this.breakpointObserver
+      .observe([Breakpoints.Handset, Breakpoints.TabletPortrait])
+      .pipe(map((result) => result.matches)),
     { initialValue: false },
   );
 
