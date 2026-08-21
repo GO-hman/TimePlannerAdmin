@@ -25,11 +25,27 @@ export interface UserRegistrationViewInput {
     password?: string;
 }
 
+export interface UserLoginViewInput {
+    email?: string;
+    password?: string;
+}
+
+export interface LoginResponse {
+    token?: string;
+    expiresIn?: number;
+}
+
 export interface Assignment {
     id?: string;
     startTime?: Date;
     endTime?: Date;
     user?: User;
+}
+
+export interface AssignmentViewInput {
+    startTime: Date;
+    endTime: Date;
+    user: User;
 }
 
 export interface GrantedAuthority {
@@ -50,22 +66,6 @@ export interface User {
     accountNonExpired?: boolean;
     accountNonLocked?: boolean;
     credentialsNonExpired?: boolean;
-}
-
-export interface UserLoginViewInput {
-    email?: string;
-    password?: string;
-}
-
-export interface LoginResponse {
-    token?: string;
-    expiresIn?: number;
-}
-
-export interface AssignmentViewInput {
-    startTime: Date;
-    endTime: Date;
-    user: User;
 }
 
 export interface AssignmentViewOutput {

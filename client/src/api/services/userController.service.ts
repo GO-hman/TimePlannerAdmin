@@ -123,9 +123,9 @@ export class UserControllerService {
         });
     }
 
-    deleteUser(id: string, observe?: 'body', options?: RequestOptions<'text'>): Observable<string>;
-    deleteUser(id: string, observe?: 'response', options?: RequestOptions<'text'>): Observable<HttpResponse<string>>;
-    deleteUser(id: string, observe?: 'events', options?: RequestOptions<'text'>): Observable<HttpEvent<string>>;
+    deleteUser(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
+    deleteUser(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
+    deleteUser(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
     deleteUser(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/user/${id}`;
 
@@ -139,7 +139,6 @@ export class UserControllerService {
         return this.httpClient.request('delete', url, {
             observe,
             headers,
-            responseType: 'text',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

@@ -12,7 +12,7 @@ import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BASE_PATH_DEFAULT, CLIENT_CONTEXT_TOKEN_DEFAULT } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
-import { UserRegistrationViewInput, RequestOptions, User, UserLoginViewInput, LoginResponse } from "../models";
+import { UserRegistrationViewInput, RequestOptions, UserViewOutput, UserLoginViewInput, LoginResponse } from "../models";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationControllerService {
@@ -25,9 +25,9 @@ export class AuthenticationControllerService {
         return context.set(this.clientContextToken, 'default');
     }
 
-    register(userRegistrationViewInput: UserRegistrationViewInput, observe?: 'body', options?: RequestOptions<'json'>): Observable<User>;
-    register(userRegistrationViewInput: UserRegistrationViewInput, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<User>>;
-    register(userRegistrationViewInput: UserRegistrationViewInput, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<User>>;
+    register(userRegistrationViewInput: UserRegistrationViewInput, observe?: 'body', options?: RequestOptions<'json'>): Observable<UserViewOutput>;
+    register(userRegistrationViewInput: UserRegistrationViewInput, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<UserViewOutput>>;
+    register(userRegistrationViewInput: UserRegistrationViewInput, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<UserViewOutput>>;
     register(userRegistrationViewInput: UserRegistrationViewInput, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/auth/register`;
 

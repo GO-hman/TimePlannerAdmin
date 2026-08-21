@@ -123,4 +123,26 @@ export class AssignmentControllerService {
             context: this.createContextWithClientId(options?.context)
         });
     }
+
+    getByUserId(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<Array<AssignmentViewOutput>>;
+    getByUserId(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<Array<AssignmentViewOutput>>>;
+    getByUserId(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Array<AssignmentViewOutput>>>;
+    getByUserId(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/assigmnets/user/${id}`;
+
+        let headers: HttpHeaders;
+        if (options?.headers instanceof HttpHeaders) {
+            headers = options.headers;
+        } else {
+            headers = new HttpHeaders(options?.headers);
+        }
+
+        return this.httpClient.request('get', url, {
+            observe,
+            headers,
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        });
+    }
 }
