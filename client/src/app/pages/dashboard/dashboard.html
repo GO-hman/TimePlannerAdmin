@@ -1,0 +1,21 @@
+<div class="dashboard-shell">
+  @if (isMobile()) {
+    <mat-toolbar>
+      <button matIconButton (click)="drawer.toggle()" aria-label="Öppna/stäng meny">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+  }
+
+  <mat-sidenav-container class="app-container">
+    <mat-sidenav #drawer [mode]="isMobile() ? 'over' : 'side'" [opened]="!isMobile()">
+      <app-sidebar />
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="content-inner">
+        <router-outlet />
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

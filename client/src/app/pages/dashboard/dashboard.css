@@ -1,0 +1,19 @@
+.dashboard-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.app-container {
+  flex: 1;
+  min-height: 0;
+}
+
+mat-sidenav-content {
+  background: var(--mat-sys-surface);
+}
+
+.content-inner {
+  padding: 2rem;
+  overflow-x: auto;
+}

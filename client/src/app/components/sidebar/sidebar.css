@@ -1,0 +1,65 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.active {
+  font-weight: bold;
+  color: dodgerblue;
+  box-shadow: 20px 5px 5px red;
+}
+
+.links a {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+  color: white;
+  font-size: larger;
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: gray;
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+  background: #1f2937;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 1px 0 2px 1px rgba(0, 0, 0, 0.35);
+  z-index: 99999;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nav-divider mat-divider {
+  --mat-divider-color: rgba(255, 255, 255, 0.2);
+  flex: 1;
+}
