@@ -1,12 +1,13 @@
 # Time Planner Admin
 
-This is a project created for learning Java and Angular.
-I am not sure in which direction it will go, but currently the idea is to create some kind of Time planning application for "companies/teams/groups of individuals".
+A time planning application for companies/teams/groups of individuals.
+Built as a hands-on learning project for Java and Angular, and it continuously grows as I pick up new things to explore.
 
-It will continuously grow and gain features based on what I feel like I want to learn and explore.
+## Status
+Early development. See [CHANGELOG.md](CHANGELOG.md) for progress.
 
 ## Tech Stack
-* Java 25
-* Spring Boot 4.1
-* Angular 22 + TypeScript
-* Docker Compose
+
+- **Backend:** Java 25, Spring Boot 4.1
+- **Frontend:** Angular 22, TypeScript
+- **Infrastructure:** Docker Compose
