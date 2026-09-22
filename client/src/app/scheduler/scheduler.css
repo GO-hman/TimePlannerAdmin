@@ -1,0 +1,167 @@
+:host {
+  /* Custom properties cascade through child components regardless of view
+  encapsulation, so schedule-row.component.scss can reference these directly.
+  Aliased to the app's Material system tokens (material-theme.scss) so the
+  scheduler follows ThemeService's light/dark switch instead of the OS. */
+  --sched-ink: var(--mat-sys-on-surface);
+  --sched-paper: var(--mat-sys-surface);
+  --sched-panel: var(--mat-sys-surface-container-low);
+  --sched-line: var(--mat-sys-outline-variant);
+  --sched-accent: var(--mat-sys-primary);
+  --sched-accent-soft: var(--mat-sys-primary-container);
+  --sched-muted: var(--mat-sys-on-surface-variant);
+  --sched-break: var(--mat-sys-secondary);
+  --sched-row-h: 56px;
+
+  display: block;
+  font-family:
+    'Roboto',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: var(--sched-ink);
+  background: var(--sched-paper);
+}
+
+.app {
+  /* max-width: 1100px; */
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+.topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .sub {
+    color: var(--sched-muted);
+    font-size: 13.5px;
+    margin-top: 4px;
+  }
+}
+
+.day-picker {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--sched-panel);
+  border: 1px solid var(--sched-line);
+  border-radius: 8px;
+  padding: 2px 6px;
+  font-size: 14px;
+
+  .date {
+    font-weight: 500;
+    min-width: 110px;
+    text-align: center;
+  }
+}
+
+.hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--sched-accent-soft);
+  color: var(--mat-sys-on-primary-container);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  margin: 16px 0 18px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.board {
+  background: var(--sched-panel);
+  border: 1px solid var(--sched-line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.grid-scroll {
+  overflow-x: auto;
+}
+
+.grid {
+  min-width: 760px;
+}
+
+.ruler {
+  display: grid;
+  grid-template-columns: 168px 1fr;
+  border-bottom: 1px solid var(--sched-line);
+}
+
+.corner {
+  border-right: 1px solid var(--sched-line);
+}
+
+.ruler-track {
+  position: relative;
+  height: 34px;
+}
+
+.tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid var(--sched-line);
+  padding-left: 6px;
+  font-size: 11px;
+  color: var(--sched-muted);
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 168px 1fr;
+  border-bottom: 1px solid var(--sched-line);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.legend {
+  display: flex;
+  gap: 18px;
+  margin-top: 16px;
+  font-size: 12.5px;
+  color: var(--sched-muted);
+  flex-wrap: wrap;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.ghost-swatch {
+  background: var(--sched-accent);
+  opacity: 0.35;
+  border: 1px dashed var(--sched-accent);
+}

@@ -1,0 +1,35 @@
+<div class="who">
+  <div class="avatar">{{ initials(user().name) }}</div>
+  <div>
+    <div class="name">{{ user().name }}</div>
+    <!-- <div class="role">{{ employee().role }}</div> -->
+  </div>
+</div>
+
+<div
+  #track
+  class="track"
+  (pointerdown)="onPointerDown($event)"
+  (pointermove)="onPointerMove($event)"
+  (pointerup)="onPointerUp($event)"
+  (pointercancel)="onPointerCancel()"
+>
+  @for (shift of shifts(); track shift.id) {
+    @let block = rangeStyle(startMinutes(shift), endMinutes(shift));
+    <div
+      class="shift"
+      [style.left.%]="block.left"
+      [style.width.%]="block.width"
+      (pointerdown)="$event.stopPropagation()"
+      (click)="onShiftClick(shift, $event)"
+    >
+      {{ block.label }}
+    </div>
+  }
+
+  @if (draftRange(); as d) {
+    @let block = rangeStyle(d.start, d.end);
+    <div class="ghost" [style.left.%]="block.left" [style.width.%]="block.width"></div>
+    <div class="ghost-label" [style.left.%]="block.left">{{ block.label }}</div>
+  }
+</div>
