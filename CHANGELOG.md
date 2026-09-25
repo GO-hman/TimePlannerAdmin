@@ -15,7 +15,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [0.1.1] - 2026-09-25
 
-- **Scheduler:** new weekly schedule view (`Scheduler` + `ScheduleRow` components) showing one row per user.
+- **Scheduler:** Schedule view showing one row per user.
 
   ![Scheduler](screenshots/scheduler.PNG)
 
