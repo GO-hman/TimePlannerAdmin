@@ -9,9 +9,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Flyway database migrations (replacing Hibernate `ddl-auto=update`)
 - Teams / groups
-- Shift and schedule planning
+- Shifts
 - Automated tests and CI
 - Sequin integration
+
+## [0.1.1] - 2026-09-25
+
+- **Scheduler:** new weekly schedule view (`Scheduler` + `ScheduleRow` components) showing one row per user.
+
+  ![Scheduler](screenshots/scheduler.PNG)
+
+- **Localization:** Swedish (`sv-SE`) locale registered app-wide, with Angular Material's calendar/datepicker used for date selection in the scheduler
 
 ## [0.1.0] - 2026-09-21
 
