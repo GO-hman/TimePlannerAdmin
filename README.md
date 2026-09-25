@@ -26,7 +26,7 @@ docker compose up
 | ------- | --------------------- |
 | Client  | http://localhost:4200 |
 | API     | http://localhost:8080 |
-| Adminer | http://localhost:8083 |
+| Adminer | http://localhost:8086 |
 
 Adminer connects to server `db`, database `tpa`. Dev credentials are in `docker-compose.yml`.
 
