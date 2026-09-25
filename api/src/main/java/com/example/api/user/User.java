@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.example.api.assignment.Assignment;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -53,7 +54,8 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    // Deletes all assignments if user id deleted.
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Assignment> assignments = new ArrayList<>();
 

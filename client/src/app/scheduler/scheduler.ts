@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule, MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { ScheduleRowComponent, ShiftDraft } from '../schedule-row/schedule-row';
 import { tickMarks, formatTime, toDate, isSameLocalDay } from '../utils/time';
 import {
@@ -18,7 +21,16 @@ import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-scheduler',
   standalone: true,
-  imports: [CommonModule, MatSnackBarModule, MatIconModule, MatButtonModule, ScheduleRowComponent],
+  imports: [
+    CommonModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ScheduleRowComponent,
+  ],
   templateUrl: './scheduler.html',
   styleUrl: './scheduler.css',
 })
@@ -91,5 +103,11 @@ export class SchedulerComponent {
     const d = new Date(this.currentDay());
     d.setDate(d.getDate() + delta);
     this.currentDay.set(d);
+  }
+
+  onDateChange(event: MatDatepickerInputEvent<Date>): void {
+    if (event.value) {
+      this.currentDay.set(event.value);
+    }
   }
 }

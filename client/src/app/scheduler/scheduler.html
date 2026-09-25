@@ -4,14 +4,26 @@
       <h1>Tidsbokning</h1>
       <div class="sub"></div>
     </div>
-    <div class="day-picker">
-      <button mat-icon-button (click)="shiftDay(-1)" aria-label="Previous day">
-        <mat-icon>chevron_left</mat-icon>
-      </button>
-      <span class="date">{{ currentDay() | date: 'EEE, d MMM' }}</span>
-      <button mat-icon-button (click)="shiftDay(1)" aria-label="Next day">
-        <mat-icon>chevron_right</mat-icon>
-      </button>
+    <div class="date-container">
+      <mat-form-field subscriptSizing="dynamic">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [value]="currentDay()"
+          (dateChange)="onDateChange($event)"
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div class="day-picker">
+        <button mat-icon-button (click)="shiftDay(-1)" aria-label="Föregående dag">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span class="date">{{ currentDay() | date: 'EEEE, d MMM' }}</span>
+        <button mat-icon-button (click)="shiftDay(1)" aria-label="Nästa dag">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 

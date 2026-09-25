@@ -53,6 +53,8 @@ public class UserService {
         return new UserViewOutput(user);
     }
 
+    // Delete cascade if user is deleted. Maybe anonymize user instead for history
+    // of data etc etc.
     public void deleteUser(UUID id) {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No user found with id " + id));

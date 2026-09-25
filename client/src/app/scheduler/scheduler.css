@@ -59,6 +59,9 @@
   border-radius: 8px;
   padding: 2px 6px;
   font-size: 14px;
+  justify-content: space-evenly;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 
   .date {
     font-weight: 500;
