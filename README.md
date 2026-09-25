@@ -28,8 +28,8 @@ docker compose up
 | API     | http://localhost:8080 |
 | Adminer | http://localhost:8086 |
 
-Adminer connects to server `db`, database `tpa`. Dev credentials are in `docker-compose.yml`.
-Use default system admin as client login: system@admin.com//admin123
+- Adminer connects to server `db`, database `tpa`. Dev credentials are in `docker-compose.yml`.
+- Use default system admin as client login: system@admin.com//admin123
 
 ## Roadmap / Learning goals
 
