@@ -1,0 +1,65 @@
+<div class="app">
+  <div class="topbar">
+    <div>
+      <h1>Tidsbokning</h1>
+      <div class="sub"></div>
+    </div>
+    <div class="date-container">
+      <mat-form-field subscriptSizing="dynamic">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [value]="currentDay()"
+          (dateChange)="onDateChange($event)"
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div class="day-picker">
+        <button mat-icon-button (click)="shiftDay(-1)" aria-label="Föregående dag">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span class="date">{{ currentDay() | date: 'EEEE, d MMM' }}</span>
+        <button mat-icon-button (click)="shiftDay(1)" aria-label="Nästa dag">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hint"><mat-icon>show_chart</mat-icon> Klicka och dra för att skapa bokning.</div>
+
+  <div class="board">
+    <div class="grid-scroll">
+      <div class="grid">
+        <div class="ruler">
+          <div class="corner"></div>
+          <div class="ruler-track">
+            @for (tick of ticks; track tick.pct) {
+              <div class="tick" [style.left.%]="tick.pct">{{ tick.label }}</div>
+            }
+          </div>
+        </div>
+
+        <div class="rows">
+          @for (user of users(); track user.id) {
+            <div class="row">
+              <app-schedule-row
+                [user]="user"
+                [shifts]="assignmentsForDay(user)"
+                (shiftCreated)="onShiftCreated(user, $event)"
+                (shiftRemoveRequested)="onShiftRemoveRequested(user, $event)"
+              />
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <!-- <span><span class="swatch" style="background: var(--sched-accent)"></span>Shift</span>
+    <span><span class="swatch" style="background: var(--sched-break)"></span>Unpaid break</span>
+    <span><span class="swatch ghost-swatch"></span>Drawing…</span> -->
+  </div>
+</div>
